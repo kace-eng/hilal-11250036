@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Portofolio Pribadi</title>
+</head>
+<body bgcolor="#e9ecef">
+
+<table width="850" align="center" border="1" cellpadding="8" cellspacing="0" bgcolor="#ffffff">
+    <!-- HEADER -->
+    <tr>
+        <td colspan="2" align="center" bgcolor="#1e3a8a">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 110" width="100%">
+                <rect width="100%" height="100%" fill="#1e3a8a"/>
+                <text x="50%" y="55%" font-family="Arial" font-size="28" font-weight="bold" fill="white" text-anchor="middle">WEBSITE PORTOFOLIO PRIBADI</text>
+            </svg>
+        </td>
+    </tr>
+
+    <!-- BARIS TANGGAL -->
+    <tr bgcolor="#dbeafe">
+        <td colspan="2" align="right">
+            <small>Hari ini: <b id="tanggal"></b></small>
+        </td>
+    </tr>
+
+    <!-- MENU & KONTEN -->
+    <tr>
+        <td width="22%" valign="top" bgcolor="#f8fafc">
+            <table width="100%" border="1" cellpadding="6" cellspacing="0">
+                <tr><th bgcolor="#1e3a8a"><font color="#ffffff">MENU UTAMA</font></th></tr>
+                <tr><td><a href="#beranda">Beranda</a></td></tr>
+                <tr><td><a href="#cv">CV / Biodata</a></td></tr>
+                <tr><td><a href="#kerja">Portofolio</a></td></tr>
+                <tr><td><a href="#foto">Galeri Foto</a></td></tr>
+                <tr><td><a href="#kontak">Kontak</a></td></tr>
+            </table>
+        </td>
+        <td valign="top" height="350" id="konten"></td>
+    </tr>
+
+    <!-- FOOTER -->
+    <tr>
+        <td colspan="2" align="center" bgcolor="#1e3a8a">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 850 45" width="100%">
+                <rect width="100%" height="100%" fill="#1e3a8a"/>
+                <text x="50%" y="60%" font-family="Arial" font-size="14" fill="white" text-anchor="middle">Copyright 2026 - Tugas Latihan 6</text>
+            </svg>
+        </td>
+    </tr>
+</table>
+
+<!-- Isi tiap menu (dulu cv.php, beranda.php, dst.) -->
+<template id="beranda">
+<h3>Selamat Datang di Beranda</h3>
+<p>Halo! Selamat datang di website portofolio pribadi saya. Website ini dibuat untuk memenuhi tugas Latihan 6.</p>
+<p>Silakan klik menu di sebelah kiri untuk melihat informasi lengkap mengenai riwayat hidup, portofolio pekerjaan, galeri foto, maupun form kontak.</p>
+</template>
+
+<template id="cv">
+<h3>Curriculum Vitae (Biodata)</h3>
+<table width="100%" border="1" cellpadding="5" cellspacing="0">
+    <tr><td width="25%"><b>Nama Lengkap</b></td><td width="2%">:</td><td>Nama Anda Di Sini</td></tr>
+    <tr><td><b>Tempat, Tgl Lahir</b></td><td>:</td><td>Tasikmalaya, 1 Januari 2005</td></tr>
+    <tr><td><b>Alamat</b></td><td>:</td><td>Jl. Contoh Alamat No. 123, Tasikmalaya</td></tr>
+    <tr><td><b>Pendidikan</b></td><td>:</td><td>S1 Teknik Informatika / Sistem Informasi</td></tr>
+    <tr><td><b>Keahlian</b></td><td>:</td><td>HTML, JavaScript Dasar, Desain Web</td></tr>
+</table>
+</template>
+
+<template id="kerja">
+<h3>Portofolio &amp; Pengalaman</h3>
+<p>Berikut adalah beberapa daftar proyek dan pengalaman yang pernah dikerjakan:</p>
+<table width="100%" border="1" cellpadding="5" cellspacing="0">
+    <tr bgcolor="#dbeafe"><th width="10%">No</th><th width="65%">Nama Proyek / Kegiatan</th><th width="25%">Tahun</th></tr>
+    <tr><td align="center">1</td><td>Membuat Form Pendaftaran Dinamis</td><td align="center">2026</td></tr>
+    <tr><td align="center">2</td><td>Membangun Website Profil Pribadi</td><td align="center">2026</td></tr>
+    <tr><td align="center">3</td><td>Desain Banner &amp; Antarmuka Web Sederhana</td><td align="center">2025</td></tr>
+</table>
+</template>
+
+<template id="foto">
+<h3>Galeri Foto</h3>
+<table width="100%" border="1" cellpadding="5" cellspacing="0" id="galeri"></table>
+</template>
+
+<template id="kontak">
+<h3>Hubungi Saya</h3>
+<form id="formKontak">
+    <table width="100%" border="1" cellpadding="5" cellspacing="0">
+        <tr><td width="25%">Nama Pengirim</td><td width="2%">:</td><td><input type="text" id="pengirim" size="30" required></td></tr>
+        <tr><td>Email</td><td>:</td><td><input type="email" id="email" size="30" required></td></tr>
+        <tr><td>Pesan</td><td>:</td><td><textarea id="pesan" rows="4" cols="35" required></textarea></td></tr>
+        <tr><td colspan="3" align="center"><input type="submit" value="Kirim Pesan"></td></tr>
+    </table>
+</form>
+<div id="hasil"></div>
+</template>
+
+<script>
+// Tanggal (pengganti date() PHP)
+document.getElementById('tanggal').textContent =
+    new Date().toLocaleDateString('id-ID', { weekday: 'long', day: '2-digit', month: 'long', year: 'numeric' });
+
+function esc(s) {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+}
+
+// Galeri foto (pengganti gambar.php)
+function buatGaleri() {
+    const warna = ['#2563eb', '#16a34a', '#ea580c', '#dc2626', '#9333ea', '#db2777'];
+    const sel = warna.map((w, i) => `
+        <td>
+            <svg xmlns="http://www.w3.org/2000/svg" width="150" height="150" viewBox="0 0 150 150">
+                <rect width="150" height="150" fill="${w}"/>
+                <rect x="5" y="5" width="140" height="140" fill="none" stroke="#fff"/>
+                <text x="75" y="80" font-family="Arial" font-size="16" font-weight="bold" fill="#fff" text-anchor="middle">FOTO ${i + 1}</text>
+            </svg><br><small>Foto ${i + 1}</small>
+        </td>`);
+    document.getElementById('galeri').innerHTML =
+        `<tr align="center">${sel.slice(0, 3).join('')}</tr><tr align="center">${sel.slice(3).join('')}</tr>`;
+}
+
+// Form kontak (pengganti $_POST PHP)
+function aktifkanForm() {
+    document.getElementById('formKontak').addEventListener('submit', function (e) {
+        e.preventDefault();
+        const p = esc(document.getElementById('pengirim').value);
+        const m = esc(document.getElementById('email').value);
+        const s = esc(document.getElementById('pesan').value);
+        document.getElementById('hasil').innerHTML =
+            `<br><table width="100%" border="1" cellpadding="5" cellspacing="0" bgcolor="#dbeafe">
+                <tr><th>Pesan Berhasil Terkirim!</th></tr>
+                <tr><td><b>Dari:</b> ${p} (${m})<br><b>Isi Pesan:</b> ${s}</td></tr>
+            </table>`;
+    });
+}
+
+// Navigasi menu (pengganti index.php?menu=...)
+function tampil() {
+    let id = location.hash.replace('#', '');
+    if (!['cv', 'kerja', 'foto', 'kontak'].includes(id)) id = 'beranda';
+    document.getElementById('konten').innerHTML = '';
+    document.getElementById('konten').appendChild(document.getElementById(id).content.cloneNode(true));
+    if (id === 'foto') buatGaleri();
+    if (id === 'kontak') aktifkanForm();
+}
+window.addEventListener('hashchange', tampil);
+tampil();
+</script>
+
+</body>
+</html>
